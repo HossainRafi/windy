@@ -1,1 +1,1 @@
-### React App Setup With Tailwind CSS
+### This is a weather forecast react application. It's name is "Windy"
