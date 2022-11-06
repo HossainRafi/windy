@@ -65,6 +65,24 @@ const formatForecastWeather = (data) => {
   return { timezone, daily, hourly };
 };
 
+const getFormattedWeatherData = async (searchParams) => {
+  const formattedCurrentWeather = await getWeatherData(
+    "weather",
+    searchParams
+  ).then(formatCurrentWeather);
+
+  const { lat, lon } = formattedCurrentWeather;
+
+  const formattedForecastWeather = await getWeatherData("onecall", {
+    lat,
+    lon,
+    exclude: "current,minutely,alerts",
+    units: searchParams.units,
+  }).then(formatForecastWeather);
+
+  return { ...formattedCurrentWeather, ...formattedForecastWeather };
+};
+
 
 
 export default getFormattedWeatherData;
